@@ -5,6 +5,7 @@ using Notes.Application.Interfaces;
 using Notes.Application.Notes.Queries.GetNoteDetails;
 using Notes.Application.Notes.Queries.GetNoteList;
 using Notes.Persistence;
+using Notes.WebAPI.Middleware;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -58,6 +59,7 @@ void RegisterServices(IServiceCollection services)
 
 void Configure(WebApplication app)
 {
+    app.UseCustomExceptionHandler();
     app.UseRouting();
     app.UseHttpsRedirection();
     app.UseCors("AllowAll");
