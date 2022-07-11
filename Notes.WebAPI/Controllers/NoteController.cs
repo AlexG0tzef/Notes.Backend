@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Notes.Application.Notes.Commands.CreateNote;
 using Notes.Application.Notes.Commands.DeleteNote;
@@ -9,7 +10,7 @@ using Notes.WebAPI.Models;
 
 namespace Notes.WebAPI.Controllers
 {
-
+    [Produces("application/json")]
     [Route("api/[controller]")]
     public class NoteController : BaseController
     {
@@ -21,6 +22,9 @@ namespace Notes.WebAPI.Controllers
         }
 
         [HttpGet]
+        [Authorize]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<ActionResult<NoteListViewModel>> GetAll()
         {
             var query = new GetNoteListQuery()
@@ -32,6 +36,9 @@ namespace Notes.WebAPI.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<ActionResult<NoteDetailsViewModel>> Get(Guid id)
         {
             var query = new GetNoteDetailsQuery()
@@ -44,6 +51,9 @@ namespace Notes.WebAPI.Controllers
         }
 
         [HttpPost]
+        [Authorize]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<ActionResult<Guid>> Create([FromBody] CreateNoteDTO createNoteDTO)
         {
             var command = _mapper.Map<CreateNoteCommand>(createNoteDTO);
@@ -53,6 +63,9 @@ namespace Notes.WebAPI.Controllers
         }
 
         [HttpPut]
+        [Authorize]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> Update([FromBody] UpdateNoteDTO updateNoteDTO)
         {
             var command = _mapper.Map<UpdateNoteCommand>(updateNoteDTO);
@@ -62,6 +75,9 @@ namespace Notes.WebAPI.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> Delete(Guid id)
         {
             var command = new DeleteNoteCommand()
