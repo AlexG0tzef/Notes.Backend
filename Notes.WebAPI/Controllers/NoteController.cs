@@ -22,9 +22,9 @@ namespace Notes.WebAPI.Controllers
         }
 
         [HttpGet]
-        //[Authorize]
-        //[ProducesResponseType(StatusCodes.Status200OK)]
-        //[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [Authorize]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<ActionResult<NoteListViewModel>> GetAll()
         {
             var query = new GetNoteListQuery()
@@ -36,9 +36,9 @@ namespace Notes.WebAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        //[Authorize]
-        //[ProducesResponseType(StatusCodes.Status200OK)]
-        //[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [Authorize]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<ActionResult<NoteDetailsViewModel>> Get(Guid id)
         {
             var query = new GetNoteDetailsQuery()
@@ -51,9 +51,9 @@ namespace Notes.WebAPI.Controllers
         }
 
         [HttpPost]
-        //[Authorize]
-        //[ProducesResponseType(StatusCodes.Status200OK)]
-        //[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [Authorize]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<ActionResult<Guid>> Create([FromBody] CreateNoteDTO createNoteDTO)
         {
             var command = _mapper.Map<CreateNoteCommand>(createNoteDTO);
@@ -63,9 +63,9 @@ namespace Notes.WebAPI.Controllers
         }
 
         [HttpPut]
-        //[Authorize]
-        //[ProducesResponseType(StatusCodes.Status200OK)]
-        //[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [Authorize]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> Update([FromBody] UpdateNoteDTO updateNoteDTO)
         {
             var command = _mapper.Map<UpdateNoteCommand>(updateNoteDTO);
@@ -75,9 +75,9 @@ namespace Notes.WebAPI.Controllers
         }
 
         [HttpDelete("{id}")]
-        //[Authorize]
-        //[ProducesResponseType(StatusCodes.Status200OK)]
-        //[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [Authorize]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> Delete(Guid id)
         {
             var command = new DeleteNoteCommand()
